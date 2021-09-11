@@ -12,6 +12,10 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
+module "network" {
+  source = "./modules/network"
+}
+
 module "artifact_bucket" {
   source      = "./modules/s3"
   bucket_name = var.artifact_bucket_name
@@ -19,4 +23,11 @@ module "artifact_bucket" {
 
 module "github_codestar_connection" {
   source = "./modules/codestar_connection"
+}
+
+module "example_service" {
+  source            = "./modules/ecs"
+  service_name      = "example"
+  vpc_id            = module.network.vpc_id
+  public_subnet_ids = module.network.public_subnet_ids
 }
