@@ -25,9 +25,9 @@ module "github_codestar_connection" {
   source = "./modules/codestar_connection"
 }
 
-module "example_service" {
+module "ecs_service" {
   source            = "./modules/ecs"
-  service_name      = "example"
+  service_name      = var.ecs_service_name
   vpc_id            = module.network.vpc_id
   public_subnet_ids = module.network.public_subnet_ids
 }
