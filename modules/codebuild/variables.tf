@@ -6,10 +6,6 @@ variable "bucket_arn" {
   type = string
 }
 
-variable "ecr_arn" {
-  type = string
-}
-
-variable "codestar_conection_arn" {
+variable "codestar_connection_arn" {
   type = string
 }

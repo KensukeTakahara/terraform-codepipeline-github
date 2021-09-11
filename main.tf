@@ -38,9 +38,22 @@ module "codestar_connection_github" {
 }
 
 module "codebuild" {
-  source                 = "./modules/codebuild"
-  service_name           = var.service_name
-  bucket_arn             = module.artifact_bucket.arn
-  ecr_arn                = module.artifact_bucket.arn
-  codestar_conection_arn = module.codestar_connection_github.arn
+  source                  = "./modules/codebuild"
+  service_name            = var.service_name
+  bucket_arn              = module.artifact_bucket.arn
+  codestar_connection_arn = module.codestar_connection_github.arn
+}
+
+module "codepiline" {
+  source                  = "./modules/codepipeline"
+  service_name            = var.service_name
+  codestar_connection_arn = module.codestar_connection_github.arn
+  repository              = var.repository
+  branch                  = var.branch
+  codebuild_project_arn   = module.codebuild.project_arn
+  codebuild_project_id    = module.codebuild.project_id
+  ecs_cluster_name        = module.ecs.ecs_cluster_name
+  ecs_service_name        = module.ecs.ecs_service_name
+  bucket_arn              = module.artifact_bucket.arn
+  bucket_id               = module.artifact_bucket.id
 }

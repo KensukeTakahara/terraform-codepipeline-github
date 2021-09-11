@@ -37,7 +37,7 @@ resource "aws_iam_policy" "logs" {
 data "aws_iam_policy_document" "ecr" {
   statement {
     effect    = "Allow"
-    resources = [var.ecr_arn]
+    resources = ["*"]
 
     actions = [
       "ecr:GetAuthorizationToken",
@@ -65,7 +65,7 @@ resource "aws_iam_policy" "ecr" {
 data "aws_iam_policy_document" "codestar_connection" {
   statement {
     effect    = "Allow"
-    resources = [var.codestar_conection_arn]
+    resources = [var.codestar_connection_arn]
 
     actions = [
       "codestar-connections:UseConnection"
@@ -104,7 +104,7 @@ resource "aws_iam_role_policy_attachment" "codebuild_logs" {
   policy_arn = aws_iam_policy.logs.arn
 }
 
-resource "aws_iam_role_policy_attachment" "codebuild_ect" {
+resource "aws_iam_role_policy_attachment" "codebuild_ecr" {
   role       = aws_iam_role.codebuild.name
   policy_arn = aws_iam_policy.ecr.arn
 }
