@@ -16,3 +16,7 @@ module "artifact_bucket" {
   source      = "./modules/s3"
   bucket_name = var.artifact_bucket_name
 }
+
+module "github_codestar_connection" {
+  source = "./modules/codestar_connection"
+}
