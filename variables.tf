@@ -2,6 +2,6 @@ variable "artifact_bucket_name" {
   type = string
 }
 
-variable "ecs_service_name" {
+variable "service_name" {
   type = string
 }
