@@ -39,4 +39,4 @@ Source ステージについてのみ[Qiita 記事](https://qiita.com/KensukeTak
 
 ## 注意事項
 
-CodeBuild だと[Docker Hub のダウンロード制限](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/)に引っかかる事があります。
+Dockerfile では Docker Hub の nginx イメージを使用していますが、CodeBuild だと[匿名ユーザによる Docker Hub のダウンロード制限](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/)に引っかかる事があります。
