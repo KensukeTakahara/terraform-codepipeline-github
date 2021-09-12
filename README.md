@@ -25,6 +25,15 @@ terraform init
 terraform apply
 ```
 
+## 設定
+terraform.tfvars が設定ファイルです。
+|  変数 |  目的  |
+| ---- | ---- |
+|  artifact_bucket_name  |  アーティファクト用 S3 バケット名 |
+|  service_name  |  ECS のサービス名  |
+|  repository  |  CodePipeline の対象 GitHub レポジトリ  |
+|  branch  |  GitHub レポジトリの対象ブランチ  |
+
 ## 記事
 Source ステージについてのみ[Qiita 記事](https://qiita.com/KensukeTakahara/items/6ed83e83620b86b748b7)を書きました。
 
