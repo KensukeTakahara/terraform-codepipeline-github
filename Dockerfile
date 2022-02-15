@@ -1,1 +1,1 @@
-FROM public.ecr.aws/j3s1z6z4/kensuke-takahara-test:latest
+FROM public.ecr.aws/nginx/nginx:latest
