@@ -1,14 +1,6 @@
 resource "aws_s3_bucket" "main" {
   bucket        = var.bucket_name
   force_destroy = true
-
-  lifecycle_rule {
-    enabled = true
-
-    expiration {
-      days = "180"
-    }
-  }
 }
 
 resource "aws_s3_bucket_public_access_block" "name" {
