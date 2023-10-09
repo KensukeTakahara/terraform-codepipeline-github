@@ -18,6 +18,7 @@ resource "aws_codepipeline" "example" {
         FullRepositoryId     = var.repository
         BranchName           = var.branch
         OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = false
       }
     }
   }
