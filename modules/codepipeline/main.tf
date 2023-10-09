@@ -81,4 +81,9 @@ resource "aws_codepipeline_webhook" "bar" {
     json_path    = "$.action"
     match_equals = "published"
   }
+
+  filter {
+    json_path = "$.ref"
+    match_equals = "refs/heads/stg"
+  }
 }
