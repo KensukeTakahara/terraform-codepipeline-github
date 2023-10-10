@@ -18,6 +18,7 @@ resource "aws_codepipeline" "example" {
         FullRepositoryId     = var.repository
         BranchName           = var.branch
         OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = false
       }
     }
   }
@@ -40,27 +41,46 @@ resource "aws_codepipeline" "example" {
     }
   }
 
-  stage {
-    name = "Deploy"
+  # stage {
+  #   name = "Deploy"
 
-    action {
-      name            = "Deploy"
-      category        = "Deploy"
-      owner           = "AWS"
-      provider        = "ECS"
-      version         = 1
-      input_artifacts = ["Build"]
+  #   action {
+  #     name            = "Deploy"
+  #     category        = "Deploy"
+  #     owner           = "AWS"
+  #     provider        = "ECS"
+  #     version         = 1
+  #     input_artifacts = ["Build"]
 
-      configuration = {
-        ClusterName = var.ecs_cluster_name
-        ServiceName = var.ecs_service_name
-        FileName    = "imagedefinitions.json"
-      }
-    }
-  }
+  #     configuration = {
+  #       ClusterName = var.ecs_cluster_name
+  #       ServiceName = var.ecs_service_name
+  #       FileName    = "imagedefinitions.json"
+  #     }
+  #   }
+  # }
 
   artifact_store {
     location = var.bucket_id
     type     = "S3"
+  }
+}
+
+resource "aws_codepipeline_webhook" "bar" {
+  name            = "test-webhook-github"
+  authentication  = "GITHUB_HMAC"
+  target_action   = "Source"
+  target_pipeline = aws_codepipeline.example.name
+
+  authentication_configuration {
+    secret_token = "foobar"
+  }
+
+  # This does the trick! CodePipeline starts when a GitHub release is created!
+  filter {
+    # json_path = "$.ref"
+    # match_equals = "refs/tags/v.*"
+    json_path    = "$.action"
+    match_equals = "published"
   }
 }

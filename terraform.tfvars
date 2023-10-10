@@ -1,4 +1,4 @@
-artifact_bucket_name = "terraform-codepipeline-github-artifact"
+artifact_bucket_name = "tsz-terraform-codepipeline-github-artifact"
 service_name         = "example"
-repository           = "KensukeTakahara/terraform-codepipeline-github"
-branch               = "main"
+repository           = "tsz662/docker-test"
+branch               = "stg"
