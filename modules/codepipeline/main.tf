@@ -78,12 +78,9 @@ resource "aws_codepipeline_webhook" "bar" {
 
   # This does the trick! CodePipeline starts when a GitHub release is created!
   filter {
+    # json_path = "$.ref"
+    # match_equals = "refs/tags/v.*"
     json_path    = "$.action"
     match_equals = "published"
-  }
-
-  filter {
-    json_path = "$.ref"
-    match_equals = "refs/heads/stg"
   }
 }
